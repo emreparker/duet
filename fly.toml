@@ -1,0 +1,20 @@
+app = 'duet-notes'
+primary_region = 'ams'
+
+[build]
+
+[http_service]
+  internal_port = 7777
+  force_https = true
+  auto_stop_machines = 'suspend'
+  auto_start_machines = true
+  min_machines_running = 0
+
+[env]
+  PORT = '7777'
+  NODE_ENV = 'production'
+
+[[vm]]
+  memory = '512mb'
+  cpu_kind = 'shared'
+  cpus = 1

@@ -1,0 +1,144 @@
+@import "tailwindcss";
+
+@theme inline {
+  /* ── Monochrome Light Theme ── */
+  --color-ink: #1a1a1a;
+  --color-ink-light: #333333;
+  --color-ink-muted: #666666;
+  --color-ink-faint: #999999;
+
+  --color-cream: #ffffff;
+  --color-cream-mid: #f8f8f8;
+  --color-cream-deep: #f2f2f2;
+  --color-cream-dark: #e5e5e5;
+
+  --color-amber: #1a1a1a;
+  --color-amber-light: #333333;
+  --color-amber-bg: #f0f0f0;
+
+  --color-border: #e5e5e5;
+  --color-border-light: #f0f0f0;
+
+  --color-human: #10b981;
+  --color-human-bg: #ecfdf5;
+  --color-human-text: #065f46;
+
+  --color-agent: #8b5cf6;
+  --color-agent-bg: #ede9fe;
+  --color-agent-text: #5b21b6;
+
+  --color-tag-bg: #f3f4f6;
+  --color-tag-border: #e5e7eb;
+
+  /* ── Typography ── */
+  --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-serif: 'Source Serif 4', ui-serif, Georgia, serif;
+  --font-mono: 'SF Mono', 'Fira Code', ui-monospace, monospace;
+
+  /* ── Radius ── */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+}
+
+body {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body:not(:has([data-fumadocs])) {
+  background: var(--color-cream-mid);
+  color: var(--color-ink);
+}
+
+.duet-app {
+  background: var(--color-cream-mid);
+  color: var(--color-ink);
+}
+
+/* ── Scrollbar ── */
+.duet-app ::-webkit-scrollbar { width: 6px; height: 6px; }
+.duet-app ::-webkit-scrollbar-track { background: transparent; }
+.duet-app ::-webkit-scrollbar-thumb { background: var(--color-cream-dark); border-radius: 3px; }
+.duet-app ::-webkit-scrollbar-thumb:hover { background: var(--color-ink-faint); }
+
+.duet-app ::selection {
+  background: var(--color-amber-bg);
+  color: var(--color-ink);
+}
+
+/* ── Animations ── */
+@keyframes fade-up { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes pulse-soft { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+@keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+
+.anim-fade-up { animation: fade-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.anim-fade-in { animation: fade-in 0.7s ease-out both; }
+.anim-pulse { animation: pulse-soft 2.5s ease-in-out infinite; }
+.anim-float { animation: float 6s ease-in-out infinite; }
+.d1 { animation-delay: 0.1s; }
+.d2 { animation-delay: 0.2s; }
+.d3 { animation-delay: 0.35s; }
+.d4 { animation-delay: 0.5s; }
+.d5 { animation-delay: 0.7s; }
+
+/* ── Tiptap Editor ── */
+.tiptap {
+  font-family: var(--font-serif);
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--color-ink);
+}
+
+.tiptap:focus { outline: none; }
+.tiptap > *:first-child { margin-top: 0; }
+
+.tiptap h1 { font-family: var(--font-sans); font-size: 26px; font-weight: 700; margin: 32px 0 12px; line-height: 1.25; color: var(--color-ink); }
+.tiptap h2 { font-family: var(--font-sans); font-size: 21px; font-weight: 700; margin: 28px 0 8px; line-height: 1.3; color: var(--color-ink); }
+.tiptap h3 { font-family: var(--font-sans); font-size: 17px; font-weight: 600; margin: 24px 0 6px; line-height: 1.35; color: var(--color-ink); }
+
+.tiptap p { margin-bottom: 12px; }
+.tiptap p.is-editor-empty:first-child::before {
+  color: var(--color-cream-dark);
+  content: attr(data-placeholder);
+  float: left; height: 0; pointer-events: none;
+}
+
+.tiptap ul:not([data-type="taskList"]) { list-style-type: disc; padding-left: 24px; margin-bottom: 12px; }
+.tiptap ul:not([data-type="taskList"]) ul { list-style-type: circle; }
+.tiptap ul:not([data-type="taskList"]) ul ul { list-style-type: square; }
+.tiptap ol { list-style-type: decimal; padding-left: 24px; margin-bottom: 12px; }
+.tiptap ol ol { list-style-type: lower-alpha; }
+.tiptap li { margin-bottom: 4px; color: var(--color-ink); }
+.tiptap li::marker { color: var(--color-ink-muted); }
+.tiptap li p { margin-bottom: 0; }
+
+.tiptap blockquote { border-left: 3px solid var(--color-ink); padding-left: 16px; font-style: italic; color: var(--color-ink-muted); margin: 16px 0; }
+.tiptap blockquote p { margin-bottom: 4px; }
+
+.tiptap pre { background: #1a1a1a; color: #e5e5e5; border-radius: 8px; padding: 16px; font-family: var(--font-mono); font-size: 13px; line-height: 1.6; margin: 16px 0; overflow-x: auto; }
+.tiptap code { background: var(--color-cream-deep); padding: 2px 6px; border-radius: 4px; font-family: var(--font-mono); font-size: 0.9em; color: var(--color-ink); }
+.tiptap pre code { background: none; padding: 0; border-radius: 0; color: inherit; font-size: 13px; }
+.tiptap hr { border: none; border-top: 1px solid var(--color-border-light); margin: 24px 0; }
+.tiptap a { color: var(--color-ink); text-decoration: underline; text-underline-offset: 2px; }
+.tiptap strong { font-weight: 700; }
+.tiptap em { font-style: italic; }
+.tiptap s { text-decoration: line-through; color: var(--color-ink-faint); }
+
+.tiptap img { max-width: 100%; height: auto; border-radius: 8px; margin: 16px 0; cursor: pointer; transition: outline 0.15s; }
+.tiptap img.ProseMirror-selectednode { outline: 2px solid var(--color-ink); outline-offset: 2px; }
+
+.drag-handle { opacity: 0; transition: opacity 0.15s; }
+.ProseMirror:hover .drag-handle, .drag-handle:hover { opacity: 1; }
+.ProseMirror-dropcursor { color: var(--color-ink) !important; }
+
+.tiptap ul[data-type="taskList"] { list-style: none; padding-left: 0; margin-bottom: 12px; }
+.tiptap ul[data-type="taskList"] li { display: flex; align-items: flex-start; gap: 8px; }
+.tiptap ul[data-type="taskList"] li label { flex-shrink: 0; margin-top: 4px; }
+.tiptap ul[data-type="taskList"] li label input[type="checkbox"] { width: 16px; height: 16px; border-radius: 4px; accent-color: var(--color-human); cursor: pointer; }
+.tiptap ul[data-type="taskList"] li > div { flex: 1; }
+.tiptap ul[data-type="taskList"] li[data-checked="true"] > div > p { text-decoration: line-through; color: var(--color-ink-faint); }
